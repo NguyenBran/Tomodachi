@@ -1,21 +1,15 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import Game from './Game';
+import helper from '../utills/helper';
 
 
 const PrivateRoute = ({component: Component, ...rest}) => {
-    const isLogin = () => {
-        console.log('check login');
-        if (sessionStorage.getItem('user') == null){
-            return false;
-        }
-        return true;
-    }
 
     return(
         <div>
-            <Route render= {props => (
-                isLogin() ? <Component /> : <Redirect to='/login'/>
+            <Route {...rest} render= {props => (
+                helper.isLoggedIn() ? <Component {...props}/> : <Redirect to='/login'/>
             )}/>
         </div>
     );
