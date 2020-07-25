@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Card, Form, Button } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 import loginService from '../services/login';
 
 const Login = () => {
@@ -35,7 +36,11 @@ const Login = () => {
               <input type='password' onChange={handlePasswordChange} /> 
             </Form.Field>
             <Button color='linkedin' type='submit'>Submit</Button>
-            <Button className='register-btn' color='vk' type='button'>Register</Button>
+            <Button className='register-btn' color='vk' type='button'>
+              <Link to='/register' style={{color: 'white'}}>
+                Register
+              </Link>
+            </Button>
           </Form>
         </Card.Content>
       </Card>
