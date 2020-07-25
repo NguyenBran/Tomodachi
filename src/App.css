@@ -1,22 +1,91 @@
+html,
+body {
+	height: 100%;
+	margin: 0px;
+	background-image: url("./images/background/homeBackground.jpg") !important;
+}
+
+#root {
+	height: 100%;
+}
+
+.container {
+	height: 100%;
+	display: flex;
+	align-content: center;
+	align-items: center;
+	justify-content: center;
+}
+
 .background-img {
-  background-size: cover;
-  height: 100%;
-  display: flex;
-  align-content: center;
-  align-items: center;
-  justify-content: center;
-} 
-
-.pet-img{
-  margin-top: 30%;
-  width: 300px;
+	border: 3px solid grey;
+	border-radius: 5px;
+	height: auto;
+	width: 70%;
 }
 
-#root{
-  height: 100%;
+.pet-img {
+	position: absolute;
+	margin-top: 5%;
+	width: 20%;
+	height: auto;
 }
 
-html,body{
-  height: 100%;
-  margin: 0px;
+.register-btn {
+	float: right;
+}
+
+.fade-in {
+	position: absolute !important;
+	z-index: 1000;
+	animation: fadeIn ease 1s;
+	-webkit-animation: fadeIn ease 1s;
+	-moz-animation: fadeIn ease 1s;
+	-o-animation: fadeIn ease 1s;
+	-ms-animation: fadeIn ease 1s;
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@-moz-keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@-webkit-keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@-o-keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@-ms-keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
 }
