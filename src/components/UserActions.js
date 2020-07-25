@@ -25,31 +25,31 @@ const UserActions = () => {
   return ( 
     <div className='home-btns'>
             <Button animated='fade' onClick = {bathe_pet}>
-            <Button.Content visible>Bathe</Button.Content>
-            <Button.Content hidden>  
-              <Icon name='bath' />
-            </Button.Content>
+              <Button.Content visible>Bathe</Button.Content>
+              <Button.Content hidden>  
+                <Icon name='bath' />
+              </Button.Content>
             </Button>
   
             <Button animated='fade' onClick = {feed_pet}>
-            <Button.Content visible>Feed</Button.Content>
-            <Button.Content hidden>  
-              <Icon name='shopping basket'/>
-            </Button.Content>
+              <Button.Content visible>Feed</Button.Content>
+              <Button.Content hidden>  
+                <Icon name='shopping basket'/>
+              </Button.Content>
             </Button>
             
             <Button animated='fade' onClick = {play_with_pet}>
-            <Button.Content visible>Pet</Button.Content>
-            <Button.Content hidden>  
-              <Icon name='hand paper outline' />
-            </Button.Content>
+              <Button.Content visible>Pet</Button.Content>
+              <Button.Content hidden>  
+                <Icon name='hand paper outline' />
+              </Button.Content>
             </Button>
   
             <Button animated='fade' onClick = {talk_to_pet}>
-            <Button.Content visible>Talk</Button.Content>
-            <Button.Content hidden>  
-              <Icon name='comments outline' />
-            </Button.Content>
+              <Button.Content visible>Talk</Button.Content>
+              <Button.Content hidden>  
+                <Icon name='comments outline' />
+              </Button.Content>
             </Button>
           </div>
    );

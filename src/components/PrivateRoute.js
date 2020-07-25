@@ -1,13 +1,10 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import Game from './Game';
 import helper from '../utills/helper';
 
-
 const PrivateRoute = ({component: Component, ...rest}) => {
-
     return(
-        <div>
+        <div style={{height: '100%'}}>
             <Route {...rest} render= {props => (
                 helper.isLoggedIn() ? <Component {...props}/> : <Redirect to='/login'/>
             )}/>
