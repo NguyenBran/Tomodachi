@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import helper from '../utills/helper';
+import helper from '../utils/helper';
 
 const PrivateRoute = ({component: Component, ...rest}) => {
     return(

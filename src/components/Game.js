@@ -5,9 +5,10 @@ import animalCrossing from '../images/background/animalCrossing.jpg';
 import animalCrossingMusic from '../music/animal-crossing.mp3';
 import corgi from '../images/pets/corgiSwim.gif';
 import UserActions from './UserActions';
+import penguins from '../utils/penguinGifs';
 
 const Game = () => {  
-  const [petGif, setPetGif] = useState(corgi);
+  const [petGif, setPetGif] = useState(penguins.happyPenguin);
   return ( 
     <div className='container'>
       <ReactAudioPlayer
