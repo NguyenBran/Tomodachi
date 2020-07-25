@@ -1,11 +1,17 @@
 import React from 'react';
 import { Button, Icon } from 'semantic-ui-react';
+import pig from '../images/pets/pig.gif';
+import corgi from '../images/pets/corgiSwim.gif';
 
-const UserActions = () => {
+
+const UserActions = ({setPetGif}) => {
   const feed_pet = (event) => {
     event.preventDefault();
     console.log('Feed');
-    
+    setPetGif(pig);
+    setTimeout(() => {
+      setPetGif(corgi);
+    }, 3000);
   };
   
   const play_with_pet = (event) => {

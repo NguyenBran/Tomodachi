@@ -17,7 +17,7 @@ const Game = () => {
         loop={true}
       />
       <div className='background-img' style={{ backgroundImage: `url(${animalCrossing})`}}>
-          <UserActions />
+          <UserActions setPetGif={setPetGif}/>
       </div>
       <img className='pet-img' src={petGif} alt='pet' />
 
