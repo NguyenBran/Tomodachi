@@ -4,16 +4,18 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Game from './components/Game';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import PrivateRoute from './components/PrivateRoute';
 
-function App() {
+const App = () => {
   useEffect(() => {
     document.title = 'Tomodachi';
   }, []);
 
+
+
   return (
     <Router>
       <Switch>
-
         <Route path ='/login'>
           <Login />
         </Route>
@@ -22,9 +24,8 @@ function App() {
           <Register />
         </Route>
 
-        <Route path ='/'>
-          <Game />
-        </Route>
+        <PrivateRoute component={Game}/>
+
 
       </Switch>
     </Router>
