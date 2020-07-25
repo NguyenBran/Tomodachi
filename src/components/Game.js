@@ -16,6 +16,13 @@ const Game = () => {
         loop={true}
       />
       <div className='background-img' style={{ backgroundImage: `url(${animalCrossing})`}}>
+      <div class="ui progress">
+  <div class="bar">
+    <div class="progress"> Health</div>
+  </div>
+ 
+</div>
+
           <Button animated='fade' onClick = {bathe_pet}>
           <Button.Content visible>Bathe</Button.Content>
           <Button.Content hidden>  
@@ -29,7 +36,7 @@ const Game = () => {
             <Icon name='shopping basket'/>
           </Button.Content>
           </Button>
-          
+
           <Button animated='fade' onClick = {play_with_pet}>
           <Button.Content visible>Pet</Button.Content>
           <Button.Content hidden>  
@@ -80,6 +87,10 @@ const Game = () => {
     }
     console.log('Talk');
   };
+
+
 }
+
+
  
 export default Game;
