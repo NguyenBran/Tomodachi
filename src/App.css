@@ -45,6 +45,12 @@ body {
 	align-content: center;
 }
 
+.home-btns {
+	float: right;
+	padding-top: 10px;
+	padding-right: 10px;
+}
+
 .fade-in {
 	position: absolute !important;
 	z-index: 1000;
