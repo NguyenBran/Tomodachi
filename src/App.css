@@ -18,16 +18,18 @@ body {
 }
 
 .background-img {
+	background-position: center;
+	background-size: cover;
+	height: 60%;
+	width: 50%;
 	border: 3px solid grey;
 	border-radius: 5px;
-	height: auto;
-	width: 70%;
 }
 
 .pet-img {
 	position: absolute;
 	margin-top: 5%;
-	width: 20%;
+	width: 15%;
 	height: auto;
 }
 
