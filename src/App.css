@@ -45,12 +45,23 @@ body {
 	align-content: center;
 }
 
+.action-btn {
+	margin-left: 20px !important;
+}
+
 .home-btns {
 	float: right;
 	padding-top: 10px;
 	padding-right: 10px;
 }
 
+.progress {
+	width: 60%;
+}
+
+.progress-bar{
+	height:10px;
+}
 .fade-in {
 	position: absolute !important;
 	z-index: 1000;

@@ -18,7 +18,7 @@ const Game = () => {
       />
       <div className='background-img' style={{ backgroundImage: `url(${animalCrossing})`}}>
           <UserActions />
-          <ProgressBar/>
+          <ProgressBar />
       
       </div>
       <img className='pet-img' src={corgi} alt='pet' />
