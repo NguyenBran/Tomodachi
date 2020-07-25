@@ -16,12 +16,6 @@ const Game = () => {
         loop={true}
       />
       <div className='background-img' style={{ backgroundImage: `url(${animalCrossing})`}}>
-      <div class="ui progress">
-  <div class="bar">
-    <div class="progress"> Health</div>
-  </div>
- 
-</div>
 
           <Button animated='fade' onClick = {bathe_pet}>
           <Button.Content visible>Bathe</Button.Content>
@@ -54,7 +48,6 @@ const Game = () => {
       </div>
       <img className='pet-img' src={corgi} alt='pet' />
       
-
     </div>
 
   );
