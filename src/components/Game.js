@@ -16,10 +16,11 @@ const Game = () => {
         volume={.1}
         loop={true}
       />
-      <img className='background-img' src={animalCrossing} alt='pet home' />
-      <img className='pet-img' src={corgi} alt='pet' />
-      
       <div>
+      <img className='background-img' src={animalCrossing} alt='pet home' />
+      </div>
+    
+      <img className='pet-img' src={corgi} alt='pet' />
 
         <Button animated='fade' onClick = {bathe_pet}>
         <Button.Content visible>Bathe</Button.Content>
@@ -48,7 +49,7 @@ const Game = () => {
           <Icon name='shopping basket'/>
         </Button.Content>
         </Button>
-      </div>
+
     </div>
 
   );
