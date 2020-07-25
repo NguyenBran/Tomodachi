@@ -45,6 +45,10 @@ body {
 	align-content: center;
 }
 
+.action-btn {
+	margin-left: 20px !important;
+}
+
 .home-btns {
 	float: right;
 	padding-top: 10px;
