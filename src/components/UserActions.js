@@ -1,25 +1,44 @@
 import React from 'react';
 import { Button, Icon } from 'semantic-ui-react';
+import pig from '../images/pets/pig.gif';
+import corgi from '../images/pets/corgiSwim.gif';
+import penguins from '../utils/penguinGifs';
 
-const UserActions = () => {
+const UserActions = ({setPetGif}) => {
   const feed_pet = (event) => {
     event.preventDefault();
     console.log('Feed');
+    setPetGif(penguins.feedPenguin);
+    setTimeout(() => {
+      setPetGif(penguins.happyPenguin);
+    }, 3000);
   };
   
   const play_with_pet = (event) => {
     event.preventDefault();
     console.log('Pet');
+    setPetGif(penguins.playPenguin);
+    setTimeout(() => {
+      setPetGif(penguins.happyPenguin);
+    }, 3000);
   };
   
   const bathe_pet = (event) => {
     event.preventDefault();
     console.log('Bathe');
+    setPetGif(penguins.sadPenguin);
+    setTimeout(() => {
+      setPetGif(penguins.happyPenguin);
+    }, 3000);
   };
   
   const talk_to_pet = (event) => {
     event.preventDefault();
     console.log('Talk');
+    setPetGif(penguins.idlePenguin);
+    setTimeout(() => {
+      setPetGif(penguins.happyPenguin);
+    }, 3000);
   };
 
   return ( 
