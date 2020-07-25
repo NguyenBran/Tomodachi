@@ -28,7 +28,6 @@ const Login = () => {
     }
   } 
 
-
   return ( 
     <div className='user-auth-card'>
       <ReactAudioPlayer
@@ -49,7 +48,7 @@ const Login = () => {
               <input type='password' onChange={handlePasswordChange} /> 
             </Form.Field>
             <Button color='linkedin' type='submit'>Submit</Button>
-            <Button className='register-btn' color='vk' type='button'>
+            <Button className='right-position-btn' color='vk' type='button'>
               <Link to='/register' style={{color: 'white'}}>
                 Register
               </Link>
