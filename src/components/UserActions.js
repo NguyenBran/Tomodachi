@@ -5,6 +5,7 @@ const UserActions = () => {
   const feed_pet = (event) => {
     event.preventDefault();
     console.log('Feed');
+    
   };
   
   const play_with_pet = (event) => {
