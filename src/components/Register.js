@@ -3,6 +3,7 @@ import { Card, Form, Button } from 'semantic-ui-react';
 import userService from '../services/user';
 import cianwoodCityMusic from '../music/cianwood-city.mp3';
 import ReactAudioPlayer from 'react-audio-player'
+import { Link } from 'react-router-dom';
 
 const Register = () => {
   const [fullName, setFullName] = useState('');
@@ -51,6 +52,11 @@ const Register = () => {
               <input type='password' onChange={handlePasswordChange} /> 
             </Form.Field>
             <Button color='linkedin' type='submit'>Submit</Button>
+            <Button color='twitter' type='button' className='right-position-btn'>
+              <Link to='/login' style={{ color: 'white' }}>
+                Log In
+              </Link>
+            </Button>
           </Form>
         </Card.Content>
       </Card>

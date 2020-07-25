@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { Card, Form, Button } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import loginService from '../services/login';
 import cianwoodCityMusic from '../music/cianwood-city.mp3';
 import ReactAudioPlayer from 'react-audio-player'
 
+
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  let history = useHistory();
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -20,8 +22,11 @@ const Login = () => {
   const handleLogin = async (event) => {
     event.preventDefault();
     const response = await loginService.login({ username, password });
-    console.log(response);
-  }
+    if (response){
+      sessionStorage.setItem('user', JSON.stringify(response));
+      history.push('/');
+    }
+  } 
 
   return ( 
     <div className='user-auth-card'>
@@ -43,7 +48,7 @@ const Login = () => {
               <input type='password' onChange={handlePasswordChange} /> 
             </Form.Field>
             <Button color='linkedin' type='submit'>Submit</Button>
-            <Button className='register-btn' color='vk' type='button'>
+            <Button className='right-position-btn' color='vk' type='button'>
               <Link to='/register' style={{color: 'white'}}>
                 Register
               </Link>
