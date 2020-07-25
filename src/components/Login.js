@@ -17,7 +17,8 @@ const Login = () => {
   const handleLogin = async (event) => {
     event.preventDefault();
     const response = await loginService.login({ username, password });
-    console.log(response);
+    sessionStorage.setItem('user', JSON.stringify(response));
+    console.log(sessionStorage.getItem('user'));
   }
 
   return ( 
