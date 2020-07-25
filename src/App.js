@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
 import './App.css';
-import ReactAudioPlayer from 'react-audio-player';
-import animalCrossing from './images/background/animalCrossing.jpg';
-import animalCrossingMusic from './music/animal-crossing.mp3';
-import cianwoodCityMusic from './music/cianwood-city.mp3';
-import corgi from './images/pets/corgiSwim.gif';
+import Login from './components/Login';
+import Register from './components/Register';
+import Game from './components/Game';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function App() {
   useEffect(() => {
@@ -12,16 +11,23 @@ function App() {
   }, []);
 
   return (
-    <div className='container'>
-      <ReactAudioPlayer
-        src={cianwoodCityMusic}
-        autoPlay={true}
-        volume={.1}
-        loop={true}
-      />
-      <img className='background-img' src={animalCrossing} alt='pet home' />
-      <img className='pet-img' src={corgi} alt='pet' />
-    </div>
+    <Router>
+      <Switch>
+
+        <Route path ='/login'>
+          <Login />
+        </Route>
+        
+        <Route path ='/register'>
+          <Register />
+        </Route>
+
+        <Route path ='/'>
+          <Game />
+        </Route>
+
+      </Switch>
+    </Router>
   );
 }
 

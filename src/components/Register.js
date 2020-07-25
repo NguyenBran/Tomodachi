@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Card, Form, Button } from 'semantic-ui-react';
+import userService from '../services/user';
 
 const Register = () => {
   const [fullName, setFullName] = useState('');
@@ -18,33 +19,34 @@ const Register = () => {
     setPassword(event.target.value);
   }
 
-  const handleLogin = (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault();
-    console.log(fullName);
-    console.log(username);
-    console.log(password);
+    const response = await userService.register({ fullName, username, password });
+    console.log(response);
   }
 
   return ( 
-    <Card className='fade-in'>
-      <Card.Content>
-        <Form onSubmit={handleLogin}>
-        <Form.Field>
-            <label>Full Name</label>
-            <input onChange={handleFullNameChange} />
-          </Form.Field>
+    <div className='user-auth-card'>
+      <Card className='fade-in'>
+        <Card.Content>
+          <Form onSubmit={handleLogin}>
           <Form.Field>
-            <label>Username</label>
-            <input onChange={handleUsernameChange} />
-          </Form.Field>
-          <Form.Field>
-            <label>Password</label>
-            <input type='password' onChange={handlePasswordChange} /> 
-          </Form.Field>
-          <Button color='linkedin' type='submit'>Submit</Button>
-        </Form>
-      </Card.Content>
-    </Card>
+              <label>Full Name</label>
+              <input onChange={handleFullNameChange} />
+            </Form.Field>
+            <Form.Field>
+              <label>Username</label>
+              <input onChange={handleUsernameChange} />
+            </Form.Field>
+            <Form.Field>
+              <label>Password</label>
+              <input type='password' onChange={handlePasswordChange} /> 
+            </Form.Field>
+            <Button color='linkedin' type='submit'>Submit</Button>
+          </Form>
+        </Card.Content>
+      </Card>
+    </div>
   );
 }
  

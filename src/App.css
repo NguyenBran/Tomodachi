@@ -35,6 +35,14 @@ body {
 	float: right;
 }
 
+.user-auth-card {
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+}
+
 .fade-in {
 	position: absolute !important;
 	z-index: 1000;

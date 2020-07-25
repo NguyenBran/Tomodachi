@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Card, Form, Button } from 'semantic-ui-react';
+import loginService from '../services/login';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -13,29 +14,31 @@ const Login = () => {
     setPassword(event.target.value);
   }
 
-  const handleLogin = (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault();
-    console.log(username);
-    console.log(password);
+    const response = await loginService.login({ username, password });
+    console.log(response);
   }
 
   return ( 
-    <Card className='fade-in'>
-      <Card.Content>
-        <Form onSubmit={handleLogin}>
-          <Form.Field>
-            <label>Username</label>
-            <input onChange={handleUsernameChange} />
-          </Form.Field>
-          <Form.Field>
-            <label>Password</label>
-            <input type='password' onChange={handlePasswordChange} /> 
-          </Form.Field>
-          <Button color='linkedin' type='submit'>Submit</Button>
-          <Button className='register-btn' color='vk' type='button'>Register</Button>
-        </Form>
-      </Card.Content>
-    </Card>
+    <div className='user-auth-card'>
+      <Card className='fade-in'>
+        <Card.Content>
+          <Form onSubmit={handleLogin}>
+            <Form.Field>
+              <label>Username</label>
+              <input onChange={handleUsernameChange} />
+            </Form.Field>
+            <Form.Field>
+              <label>Password</label>
+              <input type='password' onChange={handlePasswordChange} /> 
+            </Form.Field>
+            <Button color='linkedin' type='submit'>Submit</Button>
+            <Button className='register-btn' color='vk' type='button'>Register</Button>
+          </Form>
+        </Card.Content>
+      </Card>
+    </div>
   );
 }
  
