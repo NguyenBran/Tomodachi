@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Card, Form, Button } from 'semantic-ui-react';
 import userService from '../services/user';
+import cianwoodCityMusic from '../music/cianwood-city.mp3';
+import ReactAudioPlayer from 'react-audio-player'
 
 const Register = () => {
   const [fullName, setFullName] = useState('');
@@ -27,6 +29,12 @@ const Register = () => {
 
   return ( 
     <div className='user-auth-card'>
+      <ReactAudioPlayer
+        src={cianwoodCityMusic}
+        autoPlay={true}
+        volume={.1}
+        loop={true}
+      />
       <Card className='fade-in'>
         <Card.Content>
           <Form onSubmit={handleLogin}>

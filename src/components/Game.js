@@ -2,14 +2,13 @@ import React from 'react';
 import ReactAudioPlayer from 'react-audio-player';
 import animalCrossing from '../images/background/animalCrossing.jpg';
 import animalCrossingMusic from '../music/animal-crossing.mp3';
-import cianwoodCityMusic from '../music/cianwood-city.mp3';
 import corgi from '../images/pets/corgiSwim.gif';
 
-const Game = () => {
+const Game = () => {  
   return ( 
     <div className='container'>
       <ReactAudioPlayer
-        src={cianwoodCityMusic}
+        src={animalCrossingMusic}
         autoPlay={true}
         volume={.1}
         loop={true}
