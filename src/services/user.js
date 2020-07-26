@@ -12,4 +12,9 @@ const createPet = async (id, petData) => {
   return response.data;
 };
 
-export default { register, createPet };
+const retrieveInfo = async(id) => {
+  const response = await axios.get(`${baseUrl}/${id}`);
+  return response.data;
+}
+
+export default { register, createPet, retrieveInfo };
