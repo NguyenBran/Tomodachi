@@ -44,9 +44,9 @@ const UserActions = ({setPetGif, user, petMapping, hunger, happiness, setHunger,
 
   };
   
-  const bathe_pet = (event) => {
+  const trick_pet = (event) => {
     event.preventDefault();
-    setPetGif(petMapping[user.petType].bathe);
+    setPetGif(petMapping[user.petType].trick);
     bathePet = setTimeout(() => {
       setPetGif(petMapping[user.petType].idle);
     }, 3000);
@@ -84,8 +84,8 @@ const UserActions = ({setPetGif, user, petMapping, hunger, happiness, setHunger,
         </Button.Content>
       </Button>
 
-      <Button animated='fade' onClick = {bathe_pet} color='twitter' className='action-btn' size='big'>
-        <Button.Content visible>Bathe</Button.Content>
+      <Button animated='fade' onClick = {trick_pet} color='twitter' className='action-btn' size='big'>
+        <Button.Content visible>Trick</Button.Content>
         <Button.Content hidden>  
           <Icon name='bath' />
         </Button.Content>
