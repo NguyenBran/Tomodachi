@@ -18,6 +18,7 @@ const Game = () => {
   const [user, setUser] = useState(null);
   const [horizontal, setHorizontal] = useState(10);
   const [vertical, setVertical] = useState(5);
+  const [transform, setTransform] = useState(0);
   let history = useHistory();
   
 
@@ -36,7 +37,6 @@ const Game = () => {
     }
     const id = sessionStorage.getItem("id");
     getPetInfo(id);
-    
   },[]);
 
   useEffect(() => {
@@ -46,9 +46,10 @@ const Game = () => {
   }, [user]);
 
   useEffect(() => { 
-    if (vertical == 20 && verticalShift == 1){
+    console.log(vertical);
+    if (vertical === 14 && verticalShift === 1){
       verticalShift = -1;
-    }else if (vertical == 5 && verticalShift == -1){
+    }else if (vertical === 5 && verticalShift === -1){
       verticalShift = 1;
     }
     setTimeout(() => {
@@ -57,10 +58,12 @@ const Game = () => {
   }, [vertical]);
 
   useEffect(() => {
-    if (horizontal == 35 && horizontalShift == 1){
+    if (horizontal === 35 && horizontalShift === 1){
       horizontalShift = -1;
-    }else if (horizontal == -35 && horizontalShift == -1) {
+      setTransform(0);
+    }else if (horizontal === -35 && horizontalShift === -1) {
       horizontalShift = 1;
+      setTransform(180);
     }
     setTimeout(() => {
       setHorizontal(horizontal + horizontalShift);
@@ -86,7 +89,7 @@ const Game = () => {
             <UserActions setPetGif={setPetGif} user={user} petMapping={petMapping}/>
             <ProgressBar user={user}/>
           </div>
-          <img className='pet-img' style={{ marginTop: `${vertical}%`, marginLeft: `${horizontal}%`}}src={petGif} alt='pet' />
+          <img className='pet-img' style={{ marginTop: `${vertical}%`, marginLeft: `${horizontal}%`, transform: `rotateY(${transform}deg)`}}src={petGif} alt='pet' />
         </>
       }
       <Button color='youtube' className="logout-btn" onClick={logoutUser}>Log Out</Button>
