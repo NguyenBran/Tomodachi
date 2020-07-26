@@ -1,0 +1,65 @@
+import React, { useState } from 'react';
+import ReactAudioPlayer from 'react-audio-player';
+import { Card, Form, Button } from 'semantic-ui-react';
+import { Link, useHistory } from 'react-router-dom';
+import animalCrossingMusic from '../music/animal-crossing.mp3';
+import userService from '../services/user';
+
+
+const CreatePet = () => {
+    const [petName, setPetName] = useState('');
+    const [petType, setPetType] = useState('');
+    let history = useHistory(); 
+
+    const handlePetName = (event) => {
+        setPetName(event.target.value);
+    }
+
+    const handlePetType = (event) => {
+        setPetType(event.target.value);
+    }
+
+    const handleCreatePet = async (event) => {
+        event.preventDefault();
+        const id = sessionStorage.getItem("id");
+        const response = await userService.createPet(id, { petName, petType });
+        history.push('/');
+
+    }
+
+
+    return (
+        <div className='user-auth-card'>
+        <ReactAudioPlayer
+            src={animalCrossingMusic}
+            autoPlay={true}
+            volume={.1}
+            loop={true}
+        />
+        <Card className='fade-in'>
+            <Card.Content>
+            <Form onSubmit={handleCreatePet}>
+                <Form.Field>
+                    <label>Pet Name</label>
+                    <input value={petName} onChange={handlePetName}/>
+                </Form.Field>
+                <Form.Field>
+                    <label>Choose A Pet!</label>
+                    <select className="ui dropdown" onChange={handlePetType}>
+                        <option value="1" >Test1</option>
+                        <option value="penguin">Penguin</option>
+                        <option value="pineapple">Pineapple</option>
+                        <option value="2">Test2</option>
+                        <option value="3">Test3</option>
+                    </select>
+                </Form.Field>
+                <Button color='linkedin' type='submit'>Submit</Button>
+            </Form>
+        </Card.Content>
+        </Card>
+        </div>
+    );
+};
+
+
+export default CreatePet;
