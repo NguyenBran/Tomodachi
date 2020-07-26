@@ -57,7 +57,7 @@ const UserActions = ({setPetGif}) => {
       </Button>
       
       <Button animated='fade' onClick = {play_with_pet} color='google plus' className='action-btn' size='big'>
-        <Button.Content visible>Pet</Button.Content>
+        <Button.Content visible>Play</Button.Content>
         <Button.Content hidden>  
           <Icon name='hand paper outline' />
         </Button.Content>
