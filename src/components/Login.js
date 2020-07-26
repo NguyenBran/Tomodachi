@@ -23,7 +23,8 @@ const Login = () => {
     event.preventDefault();
     const response = await loginService.login({ username, password });
     if (response){
-      sessionStorage.setItem('user', JSON.stringify(response));
+      sessionStorage.setItem('username', response.username);
+      sessionStorage.setItem('id', response.id);
       history.push('/');
     }
   } 

@@ -1,5 +1,5 @@
 const isLoggedIn = () => {
-    if (sessionStorage.getItem('user') == null){
+    if (sessionStorage.getItem('id') == null){
         return false;
     }
     return true;

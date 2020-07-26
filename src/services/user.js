@@ -7,4 +7,9 @@ const register = async (credentials) => {
   return response.data;
 };
 
-export default { register };
+const createPet = async (id, petData) => {
+  const response = await axios.patch(`${baseUrl}/${id}`, petData);
+  return response.data;
+};
+
+export default { register, createPet };
