@@ -17,12 +17,13 @@ const Game = () => {
   const id = sessionStorage.getItem("id");
   const [petGif, setPetGif] = useState('');
   const [user, setUser] = useState(null);
-  const [hunger, setHunger] = useState(100);
-  const [happiness, setHappiness] = useState(100);
+  const [hunger, setHunger] = useState(0);
+  const [happiness, setHappiness] = useState(0);
   const [horizontal, setHorizontal] = useState(10);
   const [vertical, setVertical] = useState(5);
   const [transform, setTransform] = useState(0);
-  const ref = useRef(false);
+  const hungerRef = useRef(false);
+  const happinessRef = useRef(false);
   let history = useHistory();
   
 
@@ -40,16 +41,15 @@ const Game = () => {
       console.log(response);
     }
 
-    ref.current = true;
     getPetInfo(id);
 
     const hungerInterval = setInterval(() => {
-      setHunger(hunger => hunger - 1);
-    }, 2000);
+      setHunger(hunger => hunger > 0 ? hunger - 1 : 0);
+    }, 1000);
 
     const happinessInterval = setInterval(() => {
-      setHappiness(happiness => happiness - 1);
-    }, 4000);
+      setHappiness(happiness => happiness > 0 ? happiness - 1 : 0);
+    }, 1000);
 
     return () => {
       clearInterval(hungerInterval);
@@ -62,8 +62,10 @@ const Game = () => {
     const update = async () => {
       const response = await userService.updatePet(id, { petHunger: hunger });
     }
-    if (ref.current) {
+    if (hungerRef.current) {
       update()
+    } else {
+      hungerRef.current = true;
     }
   }, [hunger]);
 
@@ -71,8 +73,10 @@ const Game = () => {
     const update = async () => {
       const response = await userService.updatePet(id, { petHappiness: happiness });
     }
-    if (ref.current) {
+    if (happinessRef.current) {
       update()
+    } else {
+      happinessRef.current = true;
     }
   }, [happiness]);
 
