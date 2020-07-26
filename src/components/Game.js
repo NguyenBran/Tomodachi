@@ -84,7 +84,6 @@ const Game = () => {
   }, [user]);
 
   useEffect(() => { 
-    console.log(vertical);
     if (vertical === 14 && verticalShift === 1){
       verticalShift = -1;
     }else if (vertical === 5 && verticalShift === -1){
