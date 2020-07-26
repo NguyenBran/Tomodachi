@@ -19,7 +19,11 @@ const UserActions = ({setPetGif, user, petMapping, hunger, happiness, setHunger,
 
   const feed_pet = (event) => {
     event.preventDefault();
-    setHunger(hunger + 30);
+    if (hunger < 70) {
+      setHunger(hunger + 30);      
+    } else {
+      setHunger(100);
+    }
     setPetGif(petMapping[user.petType].feed);
     feedPet = setTimeout(() => {
       setPetGif(petMapping[user.petType].idle);
@@ -28,7 +32,11 @@ const UserActions = ({setPetGif, user, petMapping, hunger, happiness, setHunger,
   
   const play_with_pet = (event) => {
     event.preventDefault();
-    setHappiness(happiness + 30);
+    if (happiness < 70) {
+      setHappiness(happiness + 30);      
+    } else {
+      setHappiness(100);
+    }
     setPetGif(petMapping[user.petType].play);
     playPet = setTimeout(() => {
       setPetGif(petMapping[user.petType].idle);
