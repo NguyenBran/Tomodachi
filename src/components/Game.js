@@ -51,15 +51,18 @@ const Game = () => {
       setHappiness(happiness => happiness - 1);
     }, 4000);
 
+    return () => {
+      clearInterval(hungerInterval);
+      clearInterval(happinessInterval);
+    }
+
   },[]);
 
   useEffect(() => {
     const update = async () => {
       const response = await userService.updatePet(id, { petHunger: hunger });
-      console.log(response);
     }
     if (ref.current) {
-      console.log('Hunger', hunger);
       update()
     }
   }, [hunger]);
@@ -67,10 +70,8 @@ const Game = () => {
   useEffect(() => {
     const update = async () => {
       const response = await userService.updatePet(id, { petHappiness: happiness });
-      console.log(response);
     }
     if (ref.current) {
-      console.log('Happiness', happiness);
       update()
     }
   }, [happiness]);
@@ -89,9 +90,13 @@ const Game = () => {
     }else if (vertical === 5 && verticalShift === -1){
       verticalShift = 1;
     }
-    setTimeout(() => {
+    const verticalInterval = setTimeout(() => {
       setVertical(vertical + verticalShift);
     }, 250);
+
+    return () => {
+      clearInterval(verticalInterval);
+    }
   }, [vertical]);
 
   useEffect(() => {
@@ -102,9 +107,13 @@ const Game = () => {
       horizontalShift = 1;
       setTransform(180);
     }
-    setTimeout(() => {
+    const horizontalInterval = setTimeout(() => {
       setHorizontal(horizontal + horizontalShift);
     }, 250);
+
+    return () => {
+      clearInterval(horizontalInterval);
+    }
   }, [horizontal]);
 
   const logoutUser = (event) => {
@@ -123,7 +132,15 @@ const Game = () => {
       {user && 
         <>
           <div className='background-img' style={{ backgroundImage: `url(${petMapping[user.petType].background})`}}>
-            <UserActions setPetGif={setPetGif} user={user} petMapping={petMapping}/>
+            <UserActions 
+              setPetGif={setPetGif} 
+              user={user} 
+              petMapping={petMapping}
+              hunger={hunger}
+              happiness={happiness}
+              setHappiness={setHappiness}
+              setHunger={setHunger}  
+            />
             <ProgressBar user={user} hunger={hunger} happiness={happiness}/>
           </div>
           <img className='pet-img' style={{ marginTop: `${vertical}%`, marginLeft: `${horizontal}%`, transform: `rotateY(${transform}deg)`}}src={petGif} alt='pet' />
