@@ -3,13 +3,13 @@ import React from "react";
 import { Progress } from 'semantic-ui-react';
 import helper from '../utils/helper';
 
-const ProgressBar = ({user}) => (
+const ProgressBar = ({user, hunger, happiness}) => (
     <div className = 'progress'>
       <h3>{user.petName} - {helper.timeSince(user.petAge)} old</h3>
         <label>Happiness</label>
-        <Progress percent={user.petHappiness} color="green" size = 'small' style={{ marginBottom: '10px' , marginTop: '5px'}}/>
+        <Progress percent={happiness} color="green" size = 'small' style={{ marginBottom: '10px' , marginTop: '5px'}}/>
         <label>Hunger</label>
-        <Progress percent={user.petHunger} color="red" size = 'small' style={{ marginBottom: '10px', marginTop: '5px' }} />
+        <Progress percent={hunger} color="red" size = 'small' style={{ marginBottom: '10px', marginTop: '5px' }} />
     </div>    
   );
   
