@@ -20,8 +20,8 @@ body {
 .background-img {
 	background-position: center;
 	background-size: cover;
-	height: 90%;
-	width: 90%;
+	height: 85%;
+	width: 85%;
 	border: 3px solid grey;
 	border-radius: 5px;
 }
@@ -53,6 +53,11 @@ body {
 	float: right;
 	padding-top: 50px;
 	padding-right: 50px;
+}
+.logout-btn {
+	position: absolute;
+	top: 15px;
+	right: 15px;
 }
 
 .progress {

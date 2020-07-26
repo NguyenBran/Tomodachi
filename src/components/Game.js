@@ -6,10 +6,13 @@ import ProgressBar from './ProgressBar';
 import userService from '../services/user';
 import penguins from '../utils/penguinGifs';
 import pineapples from '../utils/pineappleGifs'
+import { Button } from 'semantic-ui-react';
+import { useHistory } from 'react-router';
 
 const Game = () => {  
   const [petGif, setPetGif] = useState('');
   const [user, setUser] = useState(null);
+  let history = useHistory();
 
   const petMapping = {
     "penguin": penguins,
@@ -32,6 +35,11 @@ const Game = () => {
       setPetGif(petMapping[user.petType].idle);
     }
   }, [user]);
+
+  const logoutUser = (event) => {
+    sessionStorage.clear();
+    history.push('/');
+  }
   
   return ( 
     <div className='container'>
@@ -50,7 +58,7 @@ const Game = () => {
           <img className='pet-img' src={petGif} alt='pet' />
         </>
       }
-      <button></button>
+      <Button color='youtube' className="logout-btn" onClick={logoutUser}>Log Out</Button>
     </div>
   );
 }
