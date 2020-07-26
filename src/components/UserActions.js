@@ -4,7 +4,6 @@ import { Button, Icon } from 'semantic-ui-react';
 const UserActions = ({setPetGif, user, petMapping}) => {
   const feed_pet = (event) => {
     event.preventDefault();
-    console.log('Feed');
     setPetGif(petMapping[user.petType].feed);
     setTimeout(() => {
       setPetGif(petMapping[user.petType].idle);
