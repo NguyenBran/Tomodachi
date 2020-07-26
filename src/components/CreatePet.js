@@ -47,6 +47,8 @@ const CreatePet = () => {
                     <select className="ui dropdown" onChange={handlePetType}>
                         <option value="penguin">Penguin</option>
                         <option value="pineapple">Pineapple</option>
+                        <option value="pig">Pig</option>
+                        <option value="bear">Bear</option>
                     </select>
                 </Form.Field>
                 <Button color='linkedin' type='submit'>Submit</Button>
