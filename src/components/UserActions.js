@@ -17,6 +17,7 @@ const UserActions = ({setPetGif}) => {
   const play_with_pet = (event) => {
     event.preventDefault();
     console.log('Pet');
+    console.log(sessionStorage);
     setPetGif(penguins.playPenguin);
     setTimeout(() => {
       setPetGif(penguins.happyPenguin);
