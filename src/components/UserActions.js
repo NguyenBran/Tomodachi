@@ -4,7 +4,7 @@ import { Button, Icon } from 'semantic-ui-react';
 const UserActions = ({setPetGif, user, petMapping, hunger, happiness, setHunger, setHappiness}) => {
   let feedPet = null;
   let playPet = null;
-  let bathePet = null;
+  let trickPet = null;
   let talkPet = null;
 
 
@@ -12,7 +12,7 @@ const UserActions = ({setPetGif, user, petMapping, hunger, happiness, setHunger,
     return () => {
       clearTimeout(feedPet);
       clearTimeout(playPet);
-      clearTimeout(bathePet);
+      clearTimeout(trickPet);
       clearTimeout(talkPet);
     }
   }, []);
@@ -47,7 +47,11 @@ const UserActions = ({setPetGif, user, petMapping, hunger, happiness, setHunger,
   const trick_pet = (event) => {
     event.preventDefault();
     setPetGif(petMapping[user.petType].trick);
+<<<<<<< HEAD
     bathePet = setTimeout(() => {
+=======
+    trickPet = setTimeout(() => {
+>>>>>>> ddc934846b9fab2e62a893bb4f290ea2ddadb7db
       setPetGif(petMapping[user.petType].idle);
     }, 3000);
   };
@@ -87,7 +91,7 @@ const UserActions = ({setPetGif, user, petMapping, hunger, happiness, setHunger,
       <Button animated='fade' onClick = {trick_pet} color='twitter' className='action-btn' size='big'>
         <Button.Content visible>Trick</Button.Content>
         <Button.Content hidden>  
-          <Icon name='bath' />
+          <Icon name='magic' />
         </Button.Content>
       </Button>
     </div>
