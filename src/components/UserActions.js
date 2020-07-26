@@ -43,28 +43,28 @@ const UserActions = ({setPetGif}) => {
   return ( 
     <div className='home-btns'>
 
-      <Button animated='fade' onClick = {talk_to_pet} color='green' className='action-btn'>
+      <Button animated='fade' onClick = {talk_to_pet} color='green' className='action-btn' size='big'>
         <Button.Content visible>Talk</Button.Content>
         <Button.Content hidden>  
           <Icon name='comments outline' />
         </Button.Content>
       </Button>
 
-      <Button animated='fade' onClick = {feed_pet} color='olive' className='action-btn'>
+      <Button animated='fade' onClick = {feed_pet} color='olive' className='action-btn' size='big'>
         <Button.Content visible>Feed</Button.Content>
         <Button.Content hidden>  
           <Icon name='shopping basket'/>
         </Button.Content>
       </Button>
       
-      <Button animated='fade' onClick = {play_with_pet} color='google plus' className='action-btn'>
-        <Button.Content visible>Pet</Button.Content>
+      <Button animated='fade' onClick = {play_with_pet} color='google plus' className='action-btn' size='big'>
+        <Button.Content visible>Play</Button.Content>
         <Button.Content hidden>  
           <Icon name='hand paper outline' />
         </Button.Content>
       </Button>
 
-      <Button animated='fade' onClick = {bathe_pet} color='twitter' className='action-btn'>
+      <Button animated='fade' onClick = {bathe_pet} color='twitter' className='action-btn' size='big'>
         <Button.Content visible>Bathe</Button.Content>
         <Button.Content hidden>  
           <Icon name='bath' />

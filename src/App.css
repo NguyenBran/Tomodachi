@@ -20,8 +20,8 @@ body {
 .background-img {
 	background-position: center;
 	background-size: cover;
-	height: 60%;
-	width: 50%;
+	height: 90%;
+	width: 90%;
 	border: 3px solid grey;
 	border-radius: 5px;
 }
@@ -51,16 +51,21 @@ body {
 
 .home-btns {
 	float: right;
-	padding-top: 10px;
-	padding-right: 10px;
+	padding-top: 50px;
+	padding-right: 50px;
 }
 
 .progress {
 	width: 60%;
+	margin-top: 20px;
+	margin-left: 20px;
+	color: white !important;
+	font-size: 20px;
+	text-shadow: 2px 2px black !important;
 }
 
-.progress-bar{
-	height:10px;
+.progress-bar {
+	height: 10px;
 }
 .fade-in {
 	position: absolute !important;
