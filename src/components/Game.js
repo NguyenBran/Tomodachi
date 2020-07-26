@@ -5,9 +5,13 @@ import UserActions from './UserActions';
 import ProgressBar from './ProgressBar';
 import userService from '../services/user';
 import penguins from '../utils/penguinGifs';
-import pineapples from '../utils/pineappleGifs'
+import pineapples from '../utils/pineappleGifs';
+import pig from '../utils/pigGifs';
+import bear from '../utils/bearGifs';
 import { Button } from 'semantic-ui-react';
 import { useHistory } from 'react-router';
+let horizontalShift = -1;
+let verticalShift = 1;
 
 const Game = () => {  
   const id = sessionStorage.getItem("id");
@@ -15,12 +19,18 @@ const Game = () => {
   const [user, setUser] = useState(null);
   const [hunger, setHunger] = useState(100);
   const [happiness, setHappiness] = useState(100);
+  const [horizontal, setHorizontal] = useState(10);
+  const [vertical, setVertical] = useState(5);
+  const [transform, setTransform] = useState(0);
   const ref = useRef(false);
   let history = useHistory();
+  
 
   const petMapping = {
     "penguin": penguins,
-    "pineapple": pineapples
+    "pineapple": pineapples,
+    "pig": pig,
+    "bear": bear
   }
 
   useEffect(() => {
@@ -73,6 +83,31 @@ const Game = () => {
     }
   }, [user]);
 
+  useEffect(() => { 
+    console.log(vertical);
+    if (vertical === 14 && verticalShift === 1){
+      verticalShift = -1;
+    }else if (vertical === 5 && verticalShift === -1){
+      verticalShift = 1;
+    }
+    setTimeout(() => {
+      setVertical(vertical + verticalShift);
+    }, 250);
+  }, [vertical]);
+
+  useEffect(() => {
+    if (horizontal === 35 && horizontalShift === 1){
+      horizontalShift = -1;
+      setTransform(0);
+    }else if (horizontal === -35 && horizontalShift === -1) {
+      horizontalShift = 1;
+      setTransform(180);
+    }
+    setTimeout(() => {
+      setHorizontal(horizontal + horizontalShift);
+    }, 250);
+  }, [horizontal]);
+
   const logoutUser = (event) => {
     sessionStorage.clear();
     history.push('/');
@@ -92,7 +127,7 @@ const Game = () => {
             <UserActions setPetGif={setPetGif} user={user} petMapping={petMapping}/>
             <ProgressBar user={user} hunger={hunger} happiness={happiness}/>
           </div>
-          <img className='pet-img' src={petGif} alt='pet' />
+          <img className='pet-img' style={{ marginTop: `${vertical}%`, marginLeft: `${horizontal}%`, transform: `rotateY(${transform}deg)`}}src={petGif} alt='pet' />
         </>
       }
       <Button color='youtube' className="logout-btn" onClick={logoutUser}>Log Out</Button>
