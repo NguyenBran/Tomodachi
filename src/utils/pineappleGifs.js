@@ -11,7 +11,6 @@ export default {
     talk,
     feed,
     idle,
-    happy,
     hungry,
     trick,
     background

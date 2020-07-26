@@ -47,11 +47,7 @@ const UserActions = ({setPetGif, user, petMapping, hunger, happiness, setHunger,
   const trick_pet = (event) => {
     event.preventDefault();
     setPetGif(petMapping[user.petType].trick);
-<<<<<<< HEAD
-    bathePet = setTimeout(() => {
-=======
     trickPet = setTimeout(() => {
->>>>>>> ddc934846b9fab2e62a893bb4f290ea2ddadb7db
       setPetGif(petMapping[user.petType].idle);
     }, 3000);
   };
