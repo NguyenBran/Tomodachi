@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactAudioPlayer from 'react-audio-player';
 import animalCrossingMusic from '../music/animal-crossing.mp3';
 import UserActions from './UserActions';
-import ProgressBar from './ProgessBar';
+import ProgressBar from './ProgressBar';
 import userService from '../services/user';
 import penguins from '../utils/penguinGifs';
 import pineapples from '../utils/pineappleGifs'
