@@ -1,20 +1,36 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Icon } from 'semantic-ui-react';
 
-const UserActions = ({setPetGif, user, petMapping}) => {
+const UserActions = ({setPetGif, user, petMapping, hunger, happiness, setHunger, setHappiness}) => {
+  let feedPet = null;
+  let playPet = null;
+  let bathePet = null;
+  let talkPet = null;
+
+
+  useEffect(() => {
+    return () => {
+      clearTimeout(feedPet);
+      clearTimeout(playPet);
+      clearTimeout(bathePet);
+      clearTimeout(talkPet);
+    }
+  }, []);
+
   const feed_pet = (event) => {
     event.preventDefault();
-    console.log('Feed');
+    setHunger(hunger + 30);
     setPetGif(petMapping[user.petType].feed);
-    setTimeout(() => {
+    feedPet = setTimeout(() => {
       setPetGif(petMapping[user.petType].idle);
     }, 3000);
   };
   
   const play_with_pet = (event) => {
     event.preventDefault();
+    setHappiness(happiness + 30);
     setPetGif(petMapping[user.petType].play);
-    setTimeout(() => {
+    playPet = setTimeout(() => {
       setPetGif(petMapping[user.petType].idle);
     }, 3000);
 
@@ -23,7 +39,7 @@ const UserActions = ({setPetGif, user, petMapping}) => {
   const bathe_pet = (event) => {
     event.preventDefault();
     setPetGif(petMapping[user.petType].bathe);
-    setTimeout(() => {
+    bathePet = setTimeout(() => {
       setPetGif(petMapping[user.petType].idle);
     }, 3000);
   };
@@ -31,7 +47,7 @@ const UserActions = ({setPetGif, user, petMapping}) => {
   const talk_to_pet = (event) => {
     event.preventDefault();
     setPetGif(petMapping[user.petType].talk);
-    setTimeout(() => {
+    talkPet = setTimeout(() => {
       setPetGif(petMapping[user.petType].idle);
     }, 3000);
   };
