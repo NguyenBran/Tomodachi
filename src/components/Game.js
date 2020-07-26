@@ -1,25 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import ReactAudioPlayer from 'react-audio-player';
-import animalCrossing from '../images/background/animalCrossing.jpg';
 import animalCrossingMusic from '../music/animal-crossing.mp3';
 import UserActions from './UserActions';
-import penguins from '../utils/penguinGifs';
 import ProgressBar from './ProgessBar';
 import userService from '../services/user';
+import penguins from '../utils/penguinGifs';
+import pineapples from '../utils/pineappleGifs'
 
 const Game = () => {  
-  const [petGif, setPetGif] = useState(penguins.happyPenguin);
+  const [petGif, setPetGif] = useState('');
   const [user, setUser] = useState(null);
+
+  const petMapping = {
+    "penguin": penguins,
+    "pineapple": pineapples
+  }
 
   useEffect(() => {
     const getPetInfo = async (id) => {
       const response = await userService.retrieveInfo(id);
       setUser(response);
+      console.log(response);
     }
     const id = sessionStorage.getItem("id");
     getPetInfo(id);
     
   },[]);
+
+  useEffect(() => {
+    if (user) {
+      setPetGif(petMapping[user.petType].idle);
+    }
+  }, [user]);
   
   return ( 
     <div className='container'>
@@ -29,13 +41,16 @@ const Game = () => {
         volume={.1}
         loop={true}
       />
-      <div className='background-img' style={{ backgroundImage: `url(${animalCrossing})`}}>
-        <UserActions setPetGif={setPetGif}/>
-        {user && <ProgressBar user={user}/>}
-      
-      </div>
-      <img className='pet-img' src={petGif} alt='pet' />
-
+      {user && 
+        <>
+          <div className='background-img' style={{ backgroundImage: `url(${petMapping[user.petType].background})`}}>
+            <UserActions setPetGif={setPetGif} user={user} petMapping={petMapping}/>
+            <ProgressBar user={user}/>
+          </div>
+          <img className='pet-img' src={petGif} alt='pet' />
+        </>
+      }
+      <button></button>
     </div>
   );
 }

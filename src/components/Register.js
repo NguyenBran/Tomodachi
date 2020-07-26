@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { Card, Form, Button } from 'semantic-ui-react';
 import userService from '../services/user';
+import loginService from '../services/login';
 import cianwoodCityMusic from '../music/cianwood-city.mp3';
 import ReactAudioPlayer from 'react-audio-player'
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 const Register = () => {
   const [fullName, setFullName] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  let history = useHistory();
 
   const handleFullNameChange = (event) => {
     setFullName(event.target.value);
@@ -22,10 +24,12 @@ const Register = () => {
     setPassword(event.target.value);
   }
 
-  const handleLogin = async (event) => {
+  const handleRegister = async (event) => {
     event.preventDefault();
     const response = await userService.register({ fullName, username, password });
-    console.log(response);
+    sessionStorage.setItem('username', response.username);
+    sessionStorage.setItem('id', response.id);
+    history.push('/createPet');
   }
 
   return ( 
@@ -38,7 +42,7 @@ const Register = () => {
       />
       <Card className='fade-in'>
         <Card.Content>
-          <Form onSubmit={handleLogin}>
+          <Form onSubmit={handleRegister}>
           <Form.Field>
               <label>Full Name</label>
               <input onChange={handleFullNameChange} />
