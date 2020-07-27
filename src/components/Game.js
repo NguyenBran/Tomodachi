@@ -120,6 +120,10 @@ const Game = () => {
     }
   }, [horizontal]);
 
+  const handleEditPet = (event) => {
+    history.push('/createPet');
+  }
+
   const logoutUser = (event) => {
     sessionStorage.clear();
     history.push('/');
@@ -150,6 +154,7 @@ const Game = () => {
           <img className='pet-img' style={{ marginTop: `${vertical}%`, marginLeft: `${horizontal}%`, transform: `rotateY(${transform}deg)`}}src={petGif} alt='pet' />
         </>
       }
+      <Button color='orange' className='edit-pet-btn' onClick={handleEditPet}>Edit Pet</Button>
       <Button color='youtube' className="logout-btn" onClick={logoutUser}>Log Out</Button>
     </div>
   );
