@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Icon } from 'semantic-ui-react';
 
 const UserActions = ({setPetGif, user, petMapping, hunger, happiness, setHunger, setHappiness}) => {
@@ -7,6 +7,7 @@ const UserActions = ({setPetGif, user, petMapping, hunger, happiness, setHunger,
   let trickPet = null;
   let talkPet = null;
 
+  const [isDisabledButtons, setIsDisabledButtons] = useState([false, false, false, false]);
 
   useEffect(() => {
     return () => {
@@ -16,6 +17,16 @@ const UserActions = ({setPetGif, user, petMapping, hunger, happiness, setHunger,
       clearTimeout(talkPet);
     }
   }, []);
+    
+  const talk_to_pet = (event) => {
+    event.preventDefault();
+    setPetGif(petMapping[user.petType].talk);
+    disableButtons(0);
+    talkPet = setTimeout(() => {
+      setPetGif(petMapping[user.petType].idle);
+      enableButtons();
+    }, 3000);
+  };
 
   const feed_pet = (event) => {
     event.preventDefault();
@@ -25,8 +36,10 @@ const UserActions = ({setPetGif, user, petMapping, hunger, happiness, setHunger,
       setHunger(100);
     }
     setPetGif(petMapping[user.petType].feed);
+    disableButtons(1);
     feedPet = setTimeout(() => {
       setPetGif(petMapping[user.petType].idle);
+      enableButtons();
     }, 3000);
   };
   
@@ -38,53 +51,58 @@ const UserActions = ({setPetGif, user, petMapping, hunger, happiness, setHunger,
       setHappiness(100);
     }
     setPetGif(petMapping[user.petType].play);
+    disableButtons(2);
     playPet = setTimeout(() => {
       setPetGif(petMapping[user.petType].idle);
+      enableButtons();
     }, 3000);
-
   };
   
   const trick_pet = (event) => {
     event.preventDefault();
     setPetGif(petMapping[user.petType].trick);
+    disableButtons(3);
     trickPet = setTimeout(() => {
       setPetGif(petMapping[user.petType].idle);
+      enableButtons();
     }, 3000);
   };
-  
-  const talk_to_pet = (event) => {
-    event.preventDefault();
-    setPetGif(petMapping[user.petType].talk);
-    talkPet = setTimeout(() => {
-      setPetGif(petMapping[user.petType].idle);
-    }, 3000);
-  };
+
+  const disableButtons = (idx) => {
+    let newDisabledButtons = [true, true, true, true];
+    newDisabledButtons[idx] = false;
+    setIsDisabledButtons(newDisabledButtons);
+  }
+
+  const enableButtons = () => {
+    setIsDisabledButtons([false, false, false, false]);
+  }
 
   return ( 
     <div className='home-btns'>
 
-      <Button animated='fade' onClick = {talk_to_pet} color='green' className='action-btn' size='big'>
+      <Button animated='fade' onClick = {talk_to_pet} color='green' className='action-btn' size='big' disabled={isDisabledButtons[0]}>
         <Button.Content visible>Talk</Button.Content>
         <Button.Content hidden>  
           <Icon name='comments outline' />
         </Button.Content>
       </Button>
 
-      <Button animated='fade' onClick = {feed_pet} color='olive' className='action-btn' size='big'>
+      <Button animated='fade' onClick = {feed_pet} color='olive' className='action-btn' size='big' disabled={isDisabledButtons[1]}>
         <Button.Content visible>Feed</Button.Content>
         <Button.Content hidden>  
           <Icon name='shopping basket'/>
         </Button.Content>
       </Button>
       
-      <Button animated='fade' onClick = {play_with_pet} color='google plus' className='action-btn' size='big'>
+      <Button animated='fade' onClick = {play_with_pet} color='google plus' className='action-btn' size='big' disabled={isDisabledButtons[2]}>
         <Button.Content visible>Play</Button.Content>
         <Button.Content hidden>  
           <Icon name='hand paper outline' />
         </Button.Content>
       </Button>
 
-      <Button animated='fade' onClick = {trick_pet} color='twitter' className='action-btn' size='big'>
+      <Button animated='fade' onClick = {trick_pet} color='twitter' className='action-btn' size='big' disabled={isDisabledButtons[3]}>
         <Button.Content visible>Trick</Button.Content>
         <Button.Content hidden>  
           <Icon name='magic' />

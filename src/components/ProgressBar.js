@@ -5,11 +5,11 @@ import helper from '../utils/helper';
 
 const ProgressBar = ({user, hunger, happiness}) => (
     <div className = 'progress'>
-      <h3>{user.petName} - {helper.timeSince(user.petAge)} old</h3>
+      <h3>{user.petName}, {helper.timeSince(user.petAge)} old</h3>
         <label>Happiness</label>
-<Progress active  percent={happiness} color="green" size = 'small' style={{ marginBottom: '10px' , marginTop: '5px'}}>{happiness}%</Progress>
+        <Progress active progress='percent' percent={happiness} color="green" size = 'medium' style={{ marginBottom: '10px' , marginTop: '5px'}} />
         <label>Hunger</label>
-<Progress active percent={hunger} color="red" size = 'small' style={{ marginBottom: '10px', marginTop: '5px' }}>{hunger}%</Progress>
+        <Progress active progress='percent' percent={hunger} color="red" size = 'medium' style={{ marginBottom: '10px', marginTop: '5px' }} />
     </div>    
   );
   

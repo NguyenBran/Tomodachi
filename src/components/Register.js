@@ -3,7 +3,7 @@ import { Card, Form, Button } from 'semantic-ui-react';
 import userService from '../services/user';
 import cianwoodCityMusic from '../music/cianwood-city.mp3';
 import ReactAudioPlayer from 'react-audio-player'
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const Register = () => {
   const [fullName, setFullName] = useState('');
