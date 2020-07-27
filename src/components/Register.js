@@ -57,11 +57,6 @@ const Register = () => {
               <input type='password' onChange={handlePasswordChange} /> 
             </Form.Field>
             <Button color='linkedin' type='submit' loading={loading}>Submit</Button>
-            <Button color='twitter' type='button' className='right-position-btn'>
-              <Link to='/login' style={{ color: 'white' }}>
-                Log In
-              </Link>
-            </Button>
           </Form>
         </Card.Content>
       </Card>
