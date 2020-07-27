@@ -9,6 +9,7 @@ const Register = () => {
   const [fullName, setFullName] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   let history = useHistory();
 
   const handleFullNameChange = (event) => {
@@ -25,6 +26,7 @@ const Register = () => {
 
   const handleRegister = async (event) => {
     event.preventDefault();
+    setLoading(true);
     const response = await userService.register({ fullName, username, password });
     sessionStorage.setItem('username', response.username);
     sessionStorage.setItem('id', response.id);
@@ -54,7 +56,7 @@ const Register = () => {
               <label>Password</label>
               <input type='password' onChange={handlePasswordChange} /> 
             </Form.Field>
-            <Button color='linkedin' type='submit'>Submit</Button>
+            <Button color='linkedin' type='submit' loading={loading}>Submit</Button>
             <Button color='twitter' type='button' className='right-position-btn'>
               <Link to='/login' style={{ color: 'white' }}>
                 Log In

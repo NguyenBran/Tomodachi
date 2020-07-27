@@ -9,6 +9,7 @@ import ReactAudioPlayer from 'react-audio-player'
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   let history = useHistory();
 
   const handleUsernameChange = (event) => {
@@ -21,6 +22,7 @@ const Login = () => {
 
   const handleLogin = async (event) => {
     event.preventDefault();
+    setLoading(true);
     const response = await loginService.login({ username, password });
     if (response){
       sessionStorage.setItem('username', response.username);
@@ -48,7 +50,7 @@ const Login = () => {
               <label>Password</label>
               <input type='password' onChange={handlePasswordChange} /> 
             </Form.Field>
-            <Button color='linkedin' type='submit'>Submit</Button>
+            <Button color='linkedin' type='submit' loading={loading}>Submit</Button>
             <Button className='right-position-btn' color='vk' type='button'>
               <Link to='/register' style={{color: 'white'}}>
                 Register
