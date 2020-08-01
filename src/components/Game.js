@@ -17,8 +17,8 @@ const Game = () => {
   const id = sessionStorage.getItem("id");
   const [petGif, setPetGif] = useState('');
   const [user, setUser] = useState(null);
-  const [hunger, setHunger] = useState(0);
-  const [happiness, setHappiness] = useState(0);
+  const [hunger, setHunger] = useState(-1);
+  const [happiness, setHappiness] = useState(-1);
   const [horizontal, setHorizontal] = useState(10);
   const [vertical, setVertical] = useState(5);
   const [transform, setTransform] = useState(0);
@@ -34,29 +34,43 @@ const Game = () => {
     "bear": bear
   }
 
+  const petRanAway = async () => {
+    const petResponse = await userService.updatePet(id, { petName: '', petType: '', petHunger: 100, petHappiness: 100 });
+    alert("Your pet ran away :(. Create a new Pet!");
+    history.push('/createPet');
+  }
+
   useEffect(() => {
     const getPetInfo = async (id) => {
       const response = await userService.retrieveInfo(id);
       setUser(response);
-      console.log(response);
     }
 
     getPetInfo(id);
 
     const hungerInterval = setInterval(() => {
       setHunger(hunger => hunger > 0 ? hunger - 1 : 0);
-    }, 1000);
+    }, 250);
 
     const happinessInterval = setInterval(() => {
       setHappiness(happiness => happiness > 0 ? happiness - 1 : 0);
-    }, 1000);
+    }, 250);
 
     return () => {
       clearInterval(hungerInterval);
       clearInterval(happinessInterval);
+      
     }
 
   },[]);
+
+  useEffect(() => {
+    if (user) {
+      setPetGif(petMapping[user.petType].idle);
+      setHunger(user.petHunger);
+      setHappiness(user.petHappiness);
+    }
+  }, [user]);
 
   useEffect(() => {
     const update = async () => {
@@ -73,6 +87,11 @@ const Game = () => {
     const update = async () => {
       const response = await userService.updatePet(id, { petHappiness: happiness });
     }
+    if (happiness === 0){
+      const runAwayTimer = setTimeout(() => {
+        petRanAway();
+      }, 5000);
+    }
     if (happinessRef.current) {
       update()
     } else {
@@ -80,13 +99,6 @@ const Game = () => {
     }
   }, [happiness]);
 
-  useEffect(() => {
-    if (user) {
-      setPetGif(petMapping[user.petType].idle);
-      setHunger(user.petHunger);
-      setHappiness(user.petHappiness);
-    }
-  }, [user]);
 
   useEffect(() => { 
     if (vertical === 14 && verticalShift === 1){

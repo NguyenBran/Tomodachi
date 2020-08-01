@@ -22,7 +22,6 @@ const CreatePet = () => {
     const handleCreatePet = async (event) => {
         event.preventDefault();
         const id = sessionStorage.getItem("id");
-        console.log(petType);
         const response = await userService.createPet(id, { petName, petType });
         history.push('/');
     }
