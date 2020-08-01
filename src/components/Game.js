@@ -13,7 +13,7 @@ import { useHistory } from 'react-router';
 let horizontalShift = -1;
 let verticalShift = 1;
 
-const Game = () => {  
+const Game = (props) => {  
   const id = sessionStorage.getItem("id");
   const [petGif, setPetGif] = useState('');
   const [user, setUser] = useState(null);
@@ -36,7 +36,6 @@ const Game = () => {
 
   const petRanAway = async () => {
     const petResponse = await userService.updatePet(id, { petName: '', petType: '', petHunger: 100, petHappiness: 100 });
-    alert("Your pet ran away :(. Create a new Pet!");
     history.push('/createPet');
   }
 
@@ -76,6 +75,17 @@ const Game = () => {
     const update = async () => {
       const response = await userService.updatePet(id, { petHunger: hunger });
     }
+    if (hunger === 0){
+      const runAwayTimer = setTimeout(() => {
+        alert("Your pet went to go look for food elsewhere :(");
+        petRanAway();
+      }, 5000);
+
+      return () => {
+        clearTimeout(runAwayTimer);
+      }
+    }
+
     if (hungerRef.current) {
       update()
     } else {
@@ -87,11 +97,18 @@ const Game = () => {
     const update = async () => {
       const response = await userService.updatePet(id, { petHappiness: happiness });
     }
+
     if (happiness === 0){
       const runAwayTimer = setTimeout(() => {
+        alert("Your pet went to go play somewhere else :(");
         petRanAway();
       }, 5000);
+
+      return () => {
+        clearTimeout(runAwayTimer);
+      }
     }
+
     if (happinessRef.current) {
       update()
     } else {
@@ -140,6 +157,9 @@ const Game = () => {
     sessionStorage.clear();
     history.push('/');
   }
+  const visitFriends = (event) => {
+    history.push('/visitFriends');
+  }
   
   return ( 
     <div className='container'>
@@ -166,8 +186,13 @@ const Game = () => {
           <img className='pet-img' style={{ marginTop: `${vertical}%`, marginLeft: `${horizontal}%`, transform: `rotateY(${transform}deg)`}}src={petGif} alt='pet' />
         </>
       }
-      <Button color='orange' className='edit-pet-btn' onClick={handleEditPet}>Edit Pet</Button>
-      <Button color='youtube' className="logout-btn" onClick={logoutUser}>Log Out</Button>
+      {!props.visit &&
+        <>
+          <Button color='orange' className='edit-pet-btn' onClick={handleEditPet}>Edit Pet</Button>
+          <Button color='yellow' className='visit-friends-btn' onClick={visitFriends}>Visit a Friend!</Button>
+          <Button color='youtube' className="logout-btn" onClick={logoutUser}>Log Out</Button>
+        </>
+      }
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import ProgressBar from './ProgressBar';
 import { Button, Icon } from 'semantic-ui-react';
 
 const UserActions = ({setPetGif, user, petMapping, hunger, happiness, setHunger, setHappiness}) => {
@@ -78,9 +79,8 @@ const UserActions = ({setPetGif, user, petMapping, hunger, happiness, setHunger,
     setIsDisabledButtons([false, false, false, false]);
   }
 
-  return ( 
+  return (
     <div className='home-btns'>
-
       <Button animated='fade' onClick = {talk_to_pet} color='green' className='action-btn' size='big' disabled={isDisabledButtons[0]}>
         <Button.Content visible>Talk</Button.Content>
         <Button.Content hidden>  

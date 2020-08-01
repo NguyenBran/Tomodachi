@@ -66,6 +66,16 @@ body {
 	right: 15px;
 }
 
+.visit-friends-btn {
+	position: absolute;
+	top: 15px;
+}
+.friend-form {
+	top: 5px;
+	width: 30%;
+	left: 35%;
+}
+
 .progress {
 	width: 60%;
 	margin-top: 20px;
