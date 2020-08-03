@@ -69,7 +69,14 @@ body {
 .visit-friends-btn {
 	position: absolute;
 	top: 15px;
+	right: 30vw;
 }
+.return-home-btn {
+	position: absolute;
+	top: 15px;
+	left: 30vw;
+}
+
 .friend-form {
 	top: 5px;
 	width: 30%;

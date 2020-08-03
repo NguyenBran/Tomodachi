@@ -13,8 +13,12 @@ import { useHistory } from 'react-router';
 let horizontalShift = -1;
 let verticalShift = 1;
 
-const Game = (props) => {  
-  const id = sessionStorage.getItem("id");
+const Game = (props) => {
+  let id = sessionStorage.getItem("id");
+  const check = props.location.state && props.location.state.visit !== null && props.location.state.visit.id !== id;
+  id = check ? props.location.state.visit.id : id;
+  const [visitUser, setVisitUser] = useState(check ? true : false);
+
   const [petGif, setPetGif] = useState('');
   const [user, setUser] = useState(null);
   const [hunger, setHunger] = useState(-1);
@@ -46,19 +50,19 @@ const Game = (props) => {
     }
 
     getPetInfo(id);
+    if (!visitUser){
+      const hungerInterval = setInterval(() => {
+        setHunger(hunger => hunger > 0 ? hunger - 1 : 0);
+      }, 1000);
 
-    const hungerInterval = setInterval(() => {
-      setHunger(hunger => hunger > 0 ? hunger - 1 : 0);
-    }, 250);
+      const happinessInterval = setInterval(() => {
+        setHappiness(happiness => happiness > 0 ? happiness - 1 : 0);
+      }, 1000);
 
-    const happinessInterval = setInterval(() => {
-      setHappiness(happiness => happiness > 0 ? happiness - 1 : 0);
-    }, 250);
-
-    return () => {
-      clearInterval(hungerInterval);
-      clearInterval(happinessInterval);
-      
+      return () => {
+        clearInterval(hungerInterval);
+        clearInterval(happinessInterval);
+      }
     }
 
   },[]);
@@ -149,16 +153,14 @@ const Game = (props) => {
     }
   }, [horizontal]);
 
-  const handleEditPet = (event) => {
-    history.push('/createPet');
-  }
-
-  const logoutUser = (event) => {
+  const handleLogoutUser = () => {
     sessionStorage.clear();
     history.push('/');
   }
-  const visitFriends = (event) => {
-    history.push('/visitFriends');
+  const handleReturnHome = () => {
+    history.push('/', { visit: null });
+    setVisitUser(false);
+    window.location.reload();
   }
   
   return ( 
@@ -186,13 +188,12 @@ const Game = (props) => {
           <img className='pet-img' style={{ marginTop: `${vertical}%`, marginLeft: `${horizontal}%`, transform: `rotateY(${transform}deg)`}}src={petGif} alt='pet' />
         </>
       }
-      {!props.visit &&
-        <>
-          <Button color='orange' className='edit-pet-btn' onClick={handleEditPet}>Edit Pet</Button>
-          <Button color='yellow' className='visit-friends-btn' onClick={visitFriends}>Visit a Friend!</Button>
-          <Button color='youtube' className="logout-btn" onClick={logoutUser}>Log Out</Button>
-        </>
-      }
+      <>
+        <Button color='orange' className='edit-pet-btn' onClick={() => history.push('/createPet')}>Edit Pet</Button>
+        <Button color='yellow' className='visit-friends-btn' onClick={() => history.push('/visitFriends')}>Visit a Friend!</Button>
+        <Button color='teal' className='return-home-btn' onClick={handleReturnHome} >Return Back Home!</Button>
+        <Button color='youtube' className="logout-btn" onClick={handleLogoutUser}>Log Out</Button>
+      </>
     </div>
   );
 }

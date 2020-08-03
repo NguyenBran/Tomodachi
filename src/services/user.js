@@ -23,4 +23,9 @@ const retrieveInfo = async(id) => {
   return response.data;
 }
 
-export default { register, createPet, updatePet, retrieveInfo };
+const visitInfo = async(username) => {
+  const response = await axios.get(`${baseUrl}/visit/${username}`);
+  return response.data;
+}
+
+export default { register, createPet, updatePet, retrieveInfo, visitInfo };

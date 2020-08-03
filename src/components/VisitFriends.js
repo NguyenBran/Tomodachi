@@ -1,43 +1,41 @@
 import React, { useState } from 'react';
-import Game from './Game';
+import userService from '../services/user';
+import { useHistory } from 'react-router';
+import { Card, Form, Button } from 'semantic-ui-react';
+import ReactAudioPlayer from 'react-audio-player';
+import cianwoodCityMusic from '../music/cianwood-city.mp3';
 
 const VisitFriends = () => {
-    const [friendInfo, setFriendInfo] = useState(null);
     const [friendUsername, setFriendUsername] = useState('');
+    const [loading, setLoading] = useState(false);
+    let history = useHistory();
 
-    const visit = (event) => {
+    const visit = async (event) => {
         event.preventDefault();
-        console.log(friendUsername);
+        const response = await userService.visitInfo(friendUsername);
+        history.push('/', { visit: response });
     }
+
     return (
-        <>
-            <div className="ui container">
-                <div className="friend-form ui segment">
-                    <div className="ui form">
-                        <div className="header">
-                            Enter your friend's username:
-                        </div>
-                        <div className="ui item">
-                            <input 
-                                type="text" 
-                                value={friendUsername} 
-                                onChange={(event) => setFriendUsername(event.target.value)} 
-                            />
-                            <button 
-                                className="ui twitter small button" 
-                                type="submit" 
-                                style={{margin: "5px"}} 
-                                onClick={visit}
-                            >
-                                Visit!
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {friendInfo && <Game />}
-        </>
-        
+        <div className='user-auth-card'>
+        <ReactAudioPlayer
+          src={cianwoodCityMusic}
+          autoPlay={true}
+          volume={.1}
+          loop={true}
+        />
+        <Card className='fade-in'>
+          <Card.Content>
+            <Form onSubmit={visit}>
+              <Form.Field>
+                <label>Enter your friend's username!</label>
+                <input value={friendUsername} onChange={(e) => setFriendUsername(e.target.value)} />
+              </Form.Field>
+              <Button color='linkedin' type='submit' loading={loading}>Visit!</Button>
+            </Form>
+          </Card.Content>
+        </Card>
+      </div>
     );
 }
 
