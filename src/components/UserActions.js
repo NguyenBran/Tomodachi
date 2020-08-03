@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import ProgressBar from './ProgressBar';
 import { Button, Icon } from 'semantic-ui-react';
 
 const UserActions = ({setPetGif, user, petMapping, hunger, happiness, setHunger, setHappiness}) => {
@@ -18,15 +17,22 @@ const UserActions = ({setPetGif, user, petMapping, hunger, happiness, setHunger,
       clearTimeout(talkPet);
     }
   }, []);
+
+  const checkLocation = () => {
+    return window.location.pathname === "/";
+  }
     
   const talk_to_pet = (event) => {
     event.preventDefault();
     setPetGif(petMapping[user.petType].talk);
     disableButtons(0);
     talkPet = setTimeout(() => {
-      setPetGif(petMapping[user.petType].idle);
-      enableButtons();
+      if (checkLocation()){
+        setPetGif(petMapping[user.petType].idle);
+        enableButtons();
+      }
     }, 3000);
+
   };
 
   const feed_pet = (event) => {
@@ -39,8 +45,10 @@ const UserActions = ({setPetGif, user, petMapping, hunger, happiness, setHunger,
     setPetGif(petMapping[user.petType].feed);
     disableButtons(1);
     feedPet = setTimeout(() => {
-      setPetGif(petMapping[user.petType].idle);
-      enableButtons();
+      if (checkLocation()){
+        setPetGif(petMapping[user.petType].idle);
+        enableButtons();
+      }
     }, 3000);
   };
   
@@ -54,8 +62,10 @@ const UserActions = ({setPetGif, user, petMapping, hunger, happiness, setHunger,
     setPetGif(petMapping[user.petType].play);
     disableButtons(2);
     playPet = setTimeout(() => {
-      setPetGif(petMapping[user.petType].idle);
-      enableButtons();
+      if (checkLocation()){
+        setPetGif(petMapping[user.petType].idle);
+        enableButtons();
+      }
     }, 3000);
   };
   
@@ -64,8 +74,10 @@ const UserActions = ({setPetGif, user, petMapping, hunger, happiness, setHunger,
     setPetGif(petMapping[user.petType].trick);
     disableButtons(3);
     trickPet = setTimeout(() => {
-      setPetGif(petMapping[user.petType].idle);
-      enableButtons();
+      if (checkLocation()){
+        setPetGif(petMapping[user.petType].idle);
+        enableButtons();
+      }
     }, 3000);
   };
 
