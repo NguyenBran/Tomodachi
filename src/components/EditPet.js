@@ -52,7 +52,7 @@ const CreatePet = () => {
                 </Form.Field>
                 <Button color='linkedin' type='submit'>Submit</Button>
             </Form>
-        </Card.Content>
+            </Card.Content>
         </Card>
         </div>
     );

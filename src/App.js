@@ -6,8 +6,9 @@ import Game from './components/Game';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
-import CreatePet from './components/CreatePet';
+import EditPet from './components/EditPet';
 import VisitFriends from './components/VisitFriends';
+import PetSelector from './components/PetSelector';
 
 const App = () => {
   useEffect(() => {
@@ -17,9 +18,10 @@ const App = () => {
   return (
     <Router>
       <Switch>
+        <PublicRoute component={PetSelector} path='/petSelector' />
         <PublicRoute component={Login} path='/login'/>
         <PublicRoute component={Register} path='/register'/>
-        <PrivateRoute component={CreatePet} path='/createPet' />
+        <PrivateRoute component={EditPet} path='/EditPet' />
         <PrivateRoute component={VisitFriends} path='/visitFriends' />
         <PrivateRoute component={Game} path='/'/>
       </Switch>

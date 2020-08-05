@@ -9,7 +9,7 @@ import pineapples from '../utils/pineappleGifs';
 import pig from '../utils/pigGifs';
 import bear from '../utils/bearGifs';
 import { Button } from 'semantic-ui-react';
-import { useHistory } from 'react-router';
+import { useHistory, Link } from 'react-router-dom';
 let horizontalShift = -1;
 let verticalShift = 1;
 
@@ -181,7 +181,8 @@ const Game = (props) => {
               hunger={hunger}
               happiness={happiness}
               setHappiness={setHappiness}
-              setHunger={setHunger}  
+              setHunger={setHunger}
+              key={props.location.key}
             />
             <ProgressBar user={user} hunger={hunger} happiness={happiness}/>
           </div>
@@ -190,9 +191,21 @@ const Game = (props) => {
       }
       <>
         <Button color='orange' className='edit-pet-btn' onClick={() => history.push('/createPet')}>Edit Pet</Button>
-        <Button color='yellow' className='visit-friends-btn' onClick={() => history.push('/visitFriends')}>Visit a Friend!</Button>
-        <Button color='teal' className='return-home-btn' onClick={handleReturnHome} >Return Back Home!</Button>
-        <Button color='youtube' className="logout-btn" onClick={handleLogoutUser}>Log Out</Button>
+        <Button color='yellow' className='visit-friends-btn'>
+          <Link to='/visitFriends' style={{color: 'white'}}>
+            Visit a Friend!
+          </Link>
+        </Button>
+        <Button color='teal' className='return-home-btn' onClick={handleReturnHome}>
+          <Link to="/" style={{color: 'white'}}>
+            Return Home
+          </Link>
+        </Button>
+        <Button color='youtube' className="logout-btn" onClick={handleLogoutUser}>
+          <Link to="/login" style={{color: 'white'}}>
+            Logout
+          </Link>
+        </Button>
       </>
     </div>
   );
