@@ -1,43 +1,42 @@
-import React, { useEffect } from 'react';
-import { Button, Card, Form } from 'semantic-ui-react';
+import React, { useState } from 'react';
+import { Button, Card, Form, Select } from 'semantic-ui-react';
 import ReactAudioPlayer from'react-audio-player';
+import { useHistory } from 'react-router-dom';
 
 import cianwoodCityMusic from '../music/cianwood-city.mp3';
-import { totalQuestions } from '../utils/questions';
+import { selectedQuestions, getResults } from '../utils/questions';
+import userService from '../services/user';
 
 const PetSelector = () => {
-    let questions = totalQuestions;
-    let questionAnswers = totalQuestions.map((question) => {
+    const [petName, setPetName] = useState('');
+    let questions = selectedQuestions();
+    let questionAnswers = questions.map((question) => {
         return ({
             question: question.question,
             answer: null
         });
     });
+    let history = useHistory();
 
-    useEffect (() => {
-        buildQuestionAnswer();
-    }, []);
 
-    const handleAnswer = (index, question, answer) => {
-        questionAnswers[index] = {question, answer};
+    const handleAnswer = (answer, index) => {
+        questionAnswers[index].answer = questions[index].responses[answer];
     }
 
-    const handleQuestionAnswers = () => {
-        console.log(questionAnswers);
+    const handleQuestionAnswers = async () => {
+        const petType = getResults(questionAnswers);
+        const id = sessionStorage.getItem("id");
+        const response = await userService.createPet(id, { petName, petType });
+        history.push('/');
     }
 
-    const buildQuestionAnswer = () => {
-        
-    };
-
-    const buildOptions = (responses, index) => {
-        const results = Object.entries(responses);
-        return results.map((result, i) => {
-            return (
-                <option key={[index, i]} value={result[1]}>
-                    {result[0]}
-                </option>
-            );
+    const buildSelectOptions = (responses, index) => {
+        return Object.entries(responses).map((response, i) => {
+            return {
+                key: [index, i],
+                value: response[0],
+                text: response[0]
+            }
         });
     }
 
@@ -45,14 +44,14 @@ const PetSelector = () => {
         return (
             <Form.Field key={index}>
                 <label>{question.question}</label>
-                <select className="ui dropdown" >
-                    <option disabled selected>Select From Below</option>
-                    {buildOptions(question.responses, index)}
-                </select>
+                    <Select 
+                        placeholder='Select your response' 
+                        options={buildSelectOptions(question.responses, index)}
+                        onChange={(e) => handleAnswer(e.target.textContent, index)}
+                    />
             </Form.Field>
         );
     });
-    console.log(questionAnswers);
     
 
     return (
@@ -69,7 +68,11 @@ const PetSelector = () => {
                         <Form.Field>
                             <label>Questionnaire</label>
                         </Form.Field>
-                        {renderedQuestions}
+                        <Form.Field>
+                            <label>Pet Name</label>
+                            <input value={petName} onChange={(event) => setPetName(event.target.value)}/>
+                        </Form.Field>
+                            {renderedQuestions}
                         <Button color='linkedin' type='submit'>Submit</Button>
                     </Form>
                 </Card.Content>

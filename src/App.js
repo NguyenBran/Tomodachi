@@ -18,9 +18,9 @@ const App = () => {
   return (
     <Router>
       <Switch>
-        <PublicRoute component={PetSelector} path='/petSelector' />
         <PublicRoute component={Login} path='/login'/>
         <PublicRoute component={Register} path='/register'/>
+        <PrivateRoute component={PetSelector} path='/petSelector' />
         <PrivateRoute component={EditPet} path='/EditPet' />
         <PrivateRoute component={VisitFriends} path='/visitFriends' />
         <PrivateRoute component={Game} path='/'/>
