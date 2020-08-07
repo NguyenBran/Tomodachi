@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { Card, Form, Button } from 'semantic-ui-react';
+import ReactAudioPlayer from 'react-audio-player'
+
 import userService from '../services/user';
 import cianwoodCityMusic from '../music/cianwood-city.mp3';
-import ReactAudioPlayer from 'react-audio-player'
-import { useHistory } from 'react-router-dom';
+import history from '../history';
 
 const Register = () => {
   const [fullName, setFullName] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  let history = useHistory();
 
   const handleFullNameChange = (event) => {
     setFullName(event.target.value);

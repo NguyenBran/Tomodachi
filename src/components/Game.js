@@ -9,16 +9,18 @@ import pineapples from '../utils/pineappleGifs';
 import pig from '../utils/pigGifs';
 import bear from '../utils/bearGifs';
 import { Button } from 'semantic-ui-react';
-import { useHistory, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import history from '../history';
 let horizontalShift = -1;
 let verticalShift = 1;
+const petMapping = {
+  "penguin": penguins,
+  "pineapple": pineapples,
+  "pig": pig,
+  "bear": bear
+}
 
-const Game = (props) => {
-  let id = sessionStorage.getItem("id");
-  const check = props.location.state && props.location.state.visit !== null && props.location.state.visit.id !== id;
-  id = check ? props.location.state.visit.id : id;
-  const [visitUser, setVisitUser] = useState(check ? true : false);
-
+const Game = ({id}) => {
   const [petGif, setPetGif] = useState('');
   const [user, setUser] = useState(null);
   const [hunger, setHunger] = useState(-1);
@@ -28,29 +30,14 @@ const Game = (props) => {
   const [transform, setTransform] = useState(0);
   const hungerRef = useRef(false);
   const happinessRef = useRef(false);
-  let history = useHistory();
-  
-
-  const petMapping = {
-    "penguin": penguins,
-    "pineapple": pineapples,
-    "pig": pig,
-    "bear": bear
-  }
-
-  const petRanAway = async () => {
-    const petResponse = await userService.updatePet(id, { petName: '', petType: '', petHunger: 100, petHappiness: 100 });
-    history.push('/createPet');
-  }
 
   useEffect(() => {
-    const getPetInfo = async (id) => {
+    const getPetInfo = async () => {
       const response = await userService.retrieveInfo(id);
       setUser(response);
     }
-
-    getPetInfo(id);
-    if (!visitUser){
+    getPetInfo();
+    if (id === sessionStorage.getItem('id')){
       const hungerInterval = setInterval(() => {
         setHunger(hunger => hunger > 0 ? hunger - 1 : 0);
       }, 1000);
@@ -64,8 +51,7 @@ const Game = (props) => {
         clearInterval(happinessInterval);
       }
     }
-
-  },[]);
+  },[id]);
 
   useEffect(() => {
     if (user) {
@@ -77,12 +63,13 @@ const Game = (props) => {
 
   useEffect(() => {
     const update = async () => {
-      const response = await userService.updatePet(id, { petHunger: hunger });
+      await userService.updatePet(id, { petHunger: hunger });
     }
     if (hunger === 0){
-      const runAwayTimer = setTimeout(() => {
+      const runAwayTimer = setTimeout(async () => {
         alert("Your pet went to go look for food elsewhere :(");
-        petRanAway();
+        await userService.updatePet(id, { petName: '', petType: '', petHunger: 100, petHappiness: 100 });
+        history.push('/petQuestionnaire');
       }, 5000);
 
       return () => {
@@ -95,17 +82,18 @@ const Game = (props) => {
     } else {
       hungerRef.current = true;
     }
-  }, [hunger]);
+  }, [hunger, id]);
 
   useEffect(() => {
     const update = async () => {
-      const response = await userService.updatePet(id, { petHappiness: happiness });
+      await userService.updatePet(id, { petHappiness: happiness });
     }
 
     if (happiness === 0){
-      const runAwayTimer = setTimeout(() => {
+      const runAwayTimer = setTimeout(async () => {
         alert("Your pet went to go play somewhere else :(");
-        petRanAway();
+        await userService.updatePet(id, { petName: '', petType: '', petHunger: 100, petHappiness: 100 });
+        history.push('/petQuestionnaire');
       }, 5000);
 
       return () => {
@@ -118,7 +106,7 @@ const Game = (props) => {
     } else {
       happinessRef.current = true;
     }
-  }, [happiness]);
+  }, [happiness, id]);
 
 
   useEffect(() => { 
@@ -157,11 +145,7 @@ const Game = (props) => {
     sessionStorage.clear();
     history.push('/');
   }
-  const handleReturnHome = () => {
-    history.push('/', { visit: null });
-    setVisitUser(false);
-    window.location.reload();
-  }
+
   
   return ( 
     <div className='container'>
@@ -182,7 +166,6 @@ const Game = (props) => {
               happiness={happiness}
               setHappiness={setHappiness}
               setHunger={setHunger}
-              key={props.location.key}
             />
             <ProgressBar user={user} hunger={hunger} happiness={happiness}/>
           </div>
@@ -190,13 +173,13 @@ const Game = (props) => {
         </>
       }
       <>
-        <Button color='orange' className='edit-pet-btn' onClick={() => history.push('/createPet')}>Edit Pet</Button>
+        <Button color='orange' className='edit-pet-btn' onClick={() => history.push('/petQuestionnaire')}>Retake Questionnaire</Button>
         <Button color='yellow' className='visit-friends-btn'>
           <Link to='/visitFriends' style={{color: 'white'}}>
             Visit a Friend!
           </Link>
         </Button>
-        <Button color='teal' className='return-home-btn' onClick={handleReturnHome}>
+        <Button color='teal' className='return-home-btn'>
           <Link to="/" style={{color: 'white'}}>
             Return Home
           </Link>

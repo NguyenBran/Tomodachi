@@ -1,23 +1,22 @@
 import React, { useState } from 'react';
 import { Button, Card, Form, Select } from 'semantic-ui-react';
 import ReactAudioPlayer from'react-audio-player';
-import { useHistory } from 'react-router-dom';
 
+import history from '../history';
 import cianwoodCityMusic from '../music/cianwood-city.mp3';
 import { selectedQuestions, getResults } from '../utils/questions';
 import userService from '../services/user';
 
+const questions = selectedQuestions();
+let questionAnswers = questions.map((question) => {
+    return ({
+        question: question.question,
+        answer: null
+    });
+});
+
 const PetSelector = () => {
     const [petName, setPetName] = useState('');
-    let questions = selectedQuestions();
-    let questionAnswers = questions.map((question) => {
-        return ({
-            question: question.question,
-            answer: null
-        });
-    });
-    let history = useHistory();
-
 
     const handleAnswer = (answer, index) => {
         questionAnswers[index].answer = questions[index].responses[answer];
@@ -26,7 +25,7 @@ const PetSelector = () => {
     const handleQuestionAnswers = async () => {
         const petType = getResults(questionAnswers);
         const id = sessionStorage.getItem("id");
-        const response = await userService.createPet(id, { petName, petType });
+        await userService.createPet(id, { petName, petType });
         history.push('/');
     }
 
@@ -55,7 +54,7 @@ const PetSelector = () => {
     
 
     return (
-        <div className='user-auth-card'>
+        <div className='pet-questionnaire'>
             <ReactAudioPlayer
                 src={cianwoodCityMusic}
                 autoPlay={true}

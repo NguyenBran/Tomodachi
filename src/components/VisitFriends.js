@@ -1,21 +1,18 @@
 import React, { useState } from 'react';
-import userService from '../services/user';
-import { useHistory } from 'react-router';
 import { Card, Form, Button } from 'semantic-ui-react';
 import ReactAudioPlayer from 'react-audio-player';
 import cianwoodCityMusic from '../music/cianwood-city.mp3';
 import { Link } from 'react-router-dom';
+import history from '../history';
 
 const VisitFriends = () => {
     const [friendUsername, setFriendUsername] = useState('');
     const [loading, setLoading] = useState(false);
-    let history = useHistory();
 
-    const visit = async (event) => {
+    const visit = (event) => {
         event.preventDefault();
-        const response = await userService.visitInfo(friendUsername);
         setLoading(true);
-        history.push('/', { visit: response });
+        history.push(`/visit/${friendUsername}`);
     }
 
     return (

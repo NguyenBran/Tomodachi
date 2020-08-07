@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, Icon } from 'semantic-ui-react';
 
 const UserActions = ({setPetGif, user, petMapping, hunger, happiness, setHunger, setHappiness}) => {
@@ -9,17 +9,8 @@ const UserActions = ({setPetGif, user, petMapping, hunger, happiness, setHunger,
 
   const [isDisabledButtons, setIsDisabledButtons] = useState([false, false, false, false]);
 
-  useEffect(() => {
-    return () => {
-      clearTimeout(feedPet);
-      clearTimeout(playPet);
-      clearTimeout(trickPet);
-      clearTimeout(talkPet);
-    }
-  }, []);
-
   const checkLocation = () => {
-    return window.location.pathname === "/";
+    return window.location.pathname === "/" || window.location.pathname.includes('/visit/');
   }
     
   const talk_to_pet = (event) => {
@@ -32,7 +23,9 @@ const UserActions = ({setPetGif, user, petMapping, hunger, happiness, setHunger,
         enableButtons();
       }
     }, 3000);
-
+    return () => {
+      clearTimeout(talkPet);
+    }
   };
 
   const feed_pet = (event) => {
@@ -50,6 +43,9 @@ const UserActions = ({setPetGif, user, petMapping, hunger, happiness, setHunger,
         enableButtons();
       }
     }, 3000);
+    return () => {
+      clearTimeout(feedPet);
+    }
   };
   
   const play_with_pet = (event) => {
@@ -67,6 +63,9 @@ const UserActions = ({setPetGif, user, petMapping, hunger, happiness, setHunger,
         enableButtons();
       }
     }, 3000);
+    return () => {
+      clearTimeout(playPet);
+    }
   };
   
   const trick_pet = (event) => {
@@ -79,6 +78,9 @@ const UserActions = ({setPetGif, user, petMapping, hunger, happiness, setHunger,
         enableButtons();
       }
     }, 3000);
+    return () => {
+      clearTimeout(trickPet);
+    }
   };
 
   const disableButtons = (idx) => {

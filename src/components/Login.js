@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import { Card, Form, Button } from 'semantic-ui-react';
-import { Link, useHistory } from 'react-router-dom';
-import loginService from '../services/login';
-import cianwoodCityMusic from '../music/cianwood-city.mp3';
 import ReactAudioPlayer from 'react-audio-player'
+import { Link } from 'react-router-dom';
+
+import loginService from '../services/login';
+import history from '../history';
+import cianwoodCityMusic from '../music/cianwood-city.mp3';
+
 
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  let history = useHistory();
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);

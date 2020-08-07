@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ReactAudioPlayer from 'react-audio-player';
 import { Card, Form, Button } from 'semantic-ui-react';
-import { useHistory } from 'react-router-dom';
+import history from '../history';
 import animalCrossingMusic from '../music/animal-crossing.mp3';
 import userService from '../services/user';
 
@@ -9,7 +9,6 @@ import userService from '../services/user';
 const CreatePet = () => {
     const [petName, setPetName] = useState('');
     const [petType, setPetType] = useState('penguin');
-    let history = useHistory(); 
 
     const handlePetName = (event) => {
         setPetName(event.target.value);
@@ -22,7 +21,7 @@ const CreatePet = () => {
     const handleCreatePet = async (event) => {
         event.preventDefault();
         const id = sessionStorage.getItem("id");
-        const response = await userService.createPet(id, { petName, petType });
+        await userService.createPet(id, { petName, petType });
         history.push('/');
     }
 

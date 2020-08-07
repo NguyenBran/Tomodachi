@@ -44,6 +44,16 @@ body {
 	align-content: center;
 }
 
+.pet-questionnaire {
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+	margin-top: 5%;
+	margin-bottom: 6%;
+}
+
 .action-btn {
 	margin-left: 20px !important;
 }
