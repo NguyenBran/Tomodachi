@@ -4,7 +4,7 @@ export const totalQuestions = [
         responses: {
             'Help without hesitation': { 'Brave': 3},
             'Help, even if scared': { 'Brave': 2, 'Hardy': 2},
-            'Call the police': { 'Docile': 1, 'Relaxed': 1, 'Timid': 1},
+            'Call the police': { 'Timid': 1},
             'Do nothing out of fear': { 'Timid': 3},
         }
     },
@@ -28,8 +28,8 @@ export const totalQuestions = [
         question: 'A human hand extends out of a toilet! What would you do?',
         responses: {
             'Scream and run': { 'Timid': 2 },
-            'Close the lid without a word': { 'Calm': 2, 'Hardy': 1 },
-            'Shake hands with it': { 'Brave': 2, 'Impish': 1, 'Naive': 1 }
+            'Close the lid without a word': {'Hardy': 1 },
+            'Shake hands with it': { 'Brave': 2 }
         }
     },
     {
@@ -64,12 +64,41 @@ export const totalQuestions = [
         }
     },
     {
-        question: 'which pet would you want?',
+        question: 'It\'s a pleasant day at the beach. How do you feel?',
         responses: {
-            'Pig': { 'Brave': 1000 },
-            'Penguin': { 'Timid': 1000 },
-            'Pineapple': { 'Jolly': 1000 },
-            'Bear': { 'Hardy': 1000 }
+            'This feels great!': { 'Jolly': 2 },
+            'Snore...': { 'Relaxed': 2 },
+            'I want to go home soon!': { 'Hasty': 2 },
+        }
+    },
+    {
+        question: 'It\'s the summer festival! Do you like carnivals?',
+        responses: {
+            'Love them!': { 'Jolly': 2 },
+            'Don\'t care': { 'Hasty': 1, 'Quirky': 1 },
+        }
+    },
+    {
+        question: 'It\'s the summer holidays! Where would you like to go?',
+        responses: {
+            'The beach!': { 'Jolly': 2 },
+            'Spas': { 'Calm': 2 },
+            'Anywhere': { 'Quirky': 2 },
+        }
+    },
+    {
+        question: 'Do others often call you childish?',
+        responses: {
+            'Yes': { 'Naive': 2, 'Jolly': 1 },
+            'No': { 'Calm': 2 },
+        }
+    },
+    {
+        question: 'There is a bucket. If you put water in it, how high will you fill it?',
+        responses: {
+            'Full': { 'Hardy': 2 },
+            'Half': { 'Calm': 2 },
+            'A little': { 'Quirky': 2 },
         }
     }
     // {
@@ -103,22 +132,21 @@ export const getResults = (questionAnswers) => {
         'Jolly': 0,
         'Timid': 0,
         'Hardy': 0,
-        'Relaxed': 0,
-        'Docile': 0,
     }
 
     let currMax = [null, -1];
 
     for (let response of questionAnswers) {
         for (let result of Object.entries(response['answer'])){
-            personalities[result[0]] += result[1];
-            if (personalities[result[0]] > currMax[1]){
-                currMax[0] = result[0];
-                currMax[1] = personalities[result[0]];
+            if (result[0] in personalities){
+                personalities[result[0]] += result[1];
+                if (personalities[result[0]] > currMax[1]){
+                    currMax[0] = result[0];
+                    currMax[1] = personalities[result[0]];
+                }
             }
         }
     }
-    console.log(personalities);
 
     switch(currMax[0]){
         case 'Brave':

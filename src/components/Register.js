@@ -30,7 +30,7 @@ const Register = () => {
     const response = await userService.register({ fullName, username, password });
     sessionStorage.setItem('username', response.username);
     sessionStorage.setItem('id', response.id);
-    history.push('/petSelector');
+    history.push('/petQuestionnaire');
   }
 
   return ( 
