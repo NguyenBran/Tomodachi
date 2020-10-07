@@ -101,15 +101,6 @@ export const totalQuestions = [
             'A little': { 'Quirky': 2 },
         }
     }
-    // {
-    //     question: 'question',
-    //     responses: {
-    //         '__': { '__': ___ },
-    //         '__': { '__': ___ },
-    //         '__': { '__': ___ },
-    //         '__': { '__': ___ },
-    //     }
-    // }
 
 ];
 
