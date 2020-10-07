@@ -22,11 +22,25 @@ A virtual pet simulator where users can sign up for an account and interact with
 </details>
 
 <details>
+  <summary>Questionnaire</summary>
+  
+  ![Image](images/tomodachi-questionnaire.png)
+</details>
+
+<details>
   <summary>Home Page</summary>
 
   ![Image](images/tomodachi-pet.png)
 </details>
 
+<details>
+  <summary>Visit Friends</summary>
+  
+  ![Image](images/tomodachi-visit.png)
+  ![Image](images/tomodachi-visit-friend.png)
+</details>
+
+<br/>
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
