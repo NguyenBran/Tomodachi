@@ -1,3 +1,20 @@
+# Tomodachi
+A virtual pet simulator where users can sign up for an account and interact with a pet chosen through a questionnaire. 
+
+[Tomodachi Backend](https://github.com/Huynheddie/Tomodachi-backend)
+
+## Built With
+- React
+- JavaScript
+- MongoDB
+- Node.js
+
+## Packages Used
+- React Router
+- Semantic UI
+
+## Images
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
