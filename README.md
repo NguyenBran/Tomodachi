@@ -14,6 +14,18 @@ A virtual pet simulator where users can sign up for an account and interact with
 - Semantic UI
 
 ## Images
+<details>
+  <summary>Login and Register Page</summary>
+  
+  ![Image](images/tomodachi-login.png)
+  ![Image](images/tomodachi-register.png)
+</details>
+
+<details>
+  <summary>Home Page</summary>
+
+  ![Image](images/tomodachi-pet.png)
+</details>
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
