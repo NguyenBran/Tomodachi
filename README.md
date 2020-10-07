@@ -24,7 +24,7 @@ A virtual pet simulator where users can sign up for an account and interact with
 <details>
   <summary>Questionnaire</summary>
   
-  ![Image](images/tomodachi-questionnaire.png)
+  ![Image](images/tomodachi-question.png)
 </details>
 
 <details>
