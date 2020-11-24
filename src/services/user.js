@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const baseUrl = 'http://localhost:3002/users';
-//const baseUrl ='https://tomodachi-backend-db.herokuapp.com/users';
+// const baseUrl = 'http://localhost:3002/users';
+const baseUrl ='https://tomodachi-backend-db.herokuapp.com/users';
 
 const register = async (credentials) => {
   const response = await axios.post(baseUrl, credentials);
